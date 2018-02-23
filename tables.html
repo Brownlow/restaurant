@@ -60,10 +60,10 @@
 <script type="text/javascript">
 
 
-$.get("/api/tables").done(function(tableData) {
+$.get("/api/tables").done(function(tables) {
 
 	// Loop through and display each of the customers
-	for (var i=0; i<tableData.length; i++){
+	for (var i=0; i<tables.length; i++){
 
 		// Create the HTML Well (Section) and Add the table content for each reserved table
 		var tableSection = $("<div>");
@@ -75,17 +75,17 @@ $.get("/api/tables").done(function(tableData) {
 
 
 		// Then display the remaining fields in the HTML (Section Name, Date, URL)
-		$("#tableWell-"+ i+1).append('<h2><span class="label label-primary">' + tableNumber + "</span> | " + tableData[i].customerID + "</h2>");
+		$("#tableWell-"+ i+1).append('<h2><span class="label label-primary">' + tableNumber + "</span> | " + tables[i].customerID + "</h2>");
 	}
 });
 
 
 
 
-$.get("/api/waitlist").done(function(waitlistData) {
+$.get("/api/waitlist").done(function(waitList) {
 
 	// Loop through and display each of the customers
-	for (var i=0; i<waitlistData.length; i++){
+	for (var i=0; i<waitList.length; i++){
 
 		// Create the HTML Well (Section) and Add the table content for each reserved table
 		var waitlistSection = $("<div>");
@@ -96,7 +96,7 @@ $.get("/api/waitlist").done(function(waitlistData) {
 		var tableNumber = i + 1;
 
 		// Then display the remaining fields in the HTML (Section Name, Date, URL)
-		$("#waitlistWell-"+ i+1).append('<h2><span class="label label-primary">' + tableNumber + "</span> | " + waitlistData[i].customerID + "</h2>");
+		$("#waitlistWell-"+ i+1).append('<h2><span class="label label-primary">' + tableNumber + "</span> | " + waitList[i].customerID + "</h2>");
 	}
 });
 
