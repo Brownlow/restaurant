@@ -14,21 +14,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Data Arrays
-var tables = [{
-    customerName: 'Jimbo',
-    phoneNumber: '510-555-5555',
-    customerEmail: 'sdljf@sdlkfj.com',
-    customerID: '12345'
-}];
+var tables = [];
 var waitList = [];
 
 
 // Routes
 // =============================================================
-
-// app.get("/", function(req, res) {
-//   res.send("Welcome to the Hot Restaurant Page!");
-// });
 
 app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "index.html"));
@@ -36,10 +27,6 @@ app.get("/", function(req, res) {
 
 app.get("/tables", function(req, res) {
   res.sendFile(path.join(__dirname, "tables.html"));
-});
-
-app.get("/api/tables", function(req, res) {
-  res.json(tables);
 });
 
 app.get("/reserve", function(req, res) {
@@ -50,16 +37,18 @@ app.get("/api/waitList", function(req, res) {
   res.json(waitList);
 });
 
-// Get all 
-app.get("/all", function(req, res) {
-  res.json(newReservation);
+// Tables
+app.get("/api/tables", function(req, res) {
+  res.json(tables);
 });
 
-app.post("/api/tables", function(req, res){
+app.post("/api/tables", function(req, res){ 
   var newReservation = req.body;
-  newReservation.routeName = newReservation.customerName.replace(/\s+/g, "").toLowerCase();
-
-
+  if (tables.length < 3){
+     tables.push(newReservation)
+  } else{
+    waitList.push(newReservation)
+  }
   res.json(newReservation);
 });
 
